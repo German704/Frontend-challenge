@@ -39,16 +39,21 @@ export default function Projects() {
 
   useEffect(() => {
     const fetchProjects = () => {
-      const projects = getProjectsWithUsers();
-      setProjects(projects);
+      setProjects(getProjectsWithUsers());
     };
-
     fetchProjects();
 
+    const handleStorageChange = () => {
+      setProjects(getProjectsWithUsers());
+    };
+
+
     const unsubscribe = subscribe(fetchProjects);
+    window.addEventListener("storage", handleStorageChange);
 
     return () => {
       unsubscribe();
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, [searchTerm]);
 

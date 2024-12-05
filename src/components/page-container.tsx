@@ -1,8 +1,11 @@
 import { PropsWithChildren } from 'react'
+interface Props{
+  classname?: string;
+}
 
-export default function PageContainer({children}: PropsWithChildren) {
+export const PageContainer = ({classname, children}: PropsWithChildren<Props>) => {
   return (
-    <main className='bg-white shadow-md px-2 py-4'>
+    <main className={`bg-white shadow-md w-full ${classname}`}>
       {children}
     </main>
   )
